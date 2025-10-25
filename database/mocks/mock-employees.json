@@ -1,0 +1,289 @@
+[
+  {
+    "id": "emp_001",
+    "companyId": "comp_001",
+    "employeeId": "EMP001",
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "email": "sarah.johnson@techcorp.com",
+    "phone": "+1 (555) 123-4567",
+    "position": "Senior Software Engineer",
+    "department": "Engineering",
+    "team": "Frontend Team",
+    "managerId": "emp_002",
+    "location": "San Francisco, CA",
+    "startDate": "2022-03-15",
+    "employmentType": "full-time",
+    "status": "active",
+    "avatar": null,
+    "profile": {
+      "overview": {
+        "bio": "Passionate frontend developer with 5+ years of experience in React and modern web technologies. Love building user-friendly applications and mentoring junior developers.",
+        "linkedin": "https://linkedin.com/in/sarahjohnson",
+        "github": "https://github.com/sarahjohnson",
+        "website": "https://sarahjohnson.dev",
+        "timezone": "PST",
+        "preferredLanguage": "en"
+      },
+      "competences": {
+        "technical": [
+          {
+            "category": "Frontend Development",
+            "skills": [
+              {
+                "name": "React",
+                "level": "Expert",
+                "yearsOfExperience": 5,
+                "lastUsed": "2024-01-15",
+                "certifications": ["React Professional Certificate"],
+                "projects": ["E-commerce Platform", "Dashboard Application"]
+              },
+              {
+                "name": "TypeScript",
+                "level": "Advanced",
+                "yearsOfExperience": 3,
+                "lastUsed": "2024-01-15",
+                "certifications": [],
+                "projects": ["Type-safe API Client", "Component Library"]
+              },
+              {
+                "name": "JavaScript",
+                "level": "Expert",
+                "yearsOfExperience": 6,
+                "lastUsed": "2024-01-15",
+                "certifications": [],
+                "projects": ["Multiple Web Applications"]
+              }
+            ]
+          },
+          {
+            "category": "Backend Development",
+            "skills": [
+              {
+                "name": "Node.js",
+                "level": "Intermediate",
+                "yearsOfExperience": 2,
+                "lastUsed": "2023-12-20",
+                "certifications": [],
+                "projects": ["API Development", "Microservices"]
+              }
+            ]
+          },
+          {
+            "category": "Cloud & DevOps",
+            "skills": [
+              {
+                "name": "AWS",
+                "level": "Intermediate",
+                "yearsOfExperience": 1,
+                "lastUsed": "2023-11-10",
+                "certifications": ["AWS Certified Developer"],
+                "projects": ["Cloud Deployment"]
+              }
+            ]
+          }
+        ],
+        "soft": [
+          {
+            "name": "Leadership",
+            "level": "Intermediate",
+            "description": "Team lead experience, mentoring junior developers"
+          },
+          {
+            "name": "Communication",
+            "level": "Advanced",
+            "description": "Excellent written and verbal communication skills"
+          },
+          {
+            "name": "Problem Solving",
+            "level": "Expert",
+            "description": "Strong analytical and problem-solving abilities"
+          }
+        ]
+      },
+      "enrichment": {
+        "lastEnriched": "2024-01-10T14:30:00Z",
+        "sources": ["linkedin", "github", "credly"],
+        "valueProposition": "Experienced React developer with strong leadership skills and cloud expertise. Proven track record of delivering high-quality frontend applications and mentoring team members.",
+        "recommendations": [
+          "Consider advanced cloud certifications",
+          "Explore microservices architecture",
+          "Develop mobile development skills"
+        ]
+      }
+    },
+    "trainingHistory": [
+      {
+        "id": "training_001",
+        "title": "Advanced React Patterns",
+        "trainer": "Dr. Mike Chen",
+        "completedDate": "2023-11-15",
+        "score": 95,
+        "certificate": "cert_001",
+        "skills": ["React", "Advanced Patterns", "Performance Optimization"]
+      },
+      {
+        "id": "training_002",
+        "title": "TypeScript Fundamentals",
+        "trainer": "Sarah Wilson",
+        "completedDate": "2023-09-20",
+        "score": 88,
+        "certificate": "cert_002",
+        "skills": ["TypeScript", "Type Safety", "Advanced Types"]
+      }
+    ],
+    "currentTrainings": [
+      {
+        "id": "training_003",
+        "title": "Microservices Architecture",
+        "trainer": "Prof. Michael Brown",
+        "startDate": "2024-01-15",
+        "endDate": "2024-02-15",
+        "progress": 65,
+        "status": "in-progress"
+      }
+    ],
+    "skillGaps": [
+      {
+        "skill": "Docker",
+        "requiredLevel": "Intermediate",
+        "currentLevel": "Beginner",
+        "priority": "high",
+        "recommendedCourses": ["Docker Fundamentals", "Container Orchestration"]
+      },
+      {
+        "skill": "GraphQL",
+        "requiredLevel": "Intermediate",
+        "currentLevel": "Beginner",
+        "priority": "medium",
+        "recommendedCourses": ["GraphQL Basics", "Advanced GraphQL"]
+      }
+    ],
+    "relevanceScore": 87,
+    "performance": {
+      "overall": 4.2,
+      "technical": 4.5,
+      "communication": 4.0,
+      "leadership": 3.8,
+      "lastReview": "2023-12-15"
+    },
+    "createdAt": "2022-03-15T00:00:00Z",
+    "updatedAt": "2024-01-15T10:30:00Z",
+    "isActive": true
+  },
+  {
+    "id": "emp_002",
+    "companyId": "comp_001",
+    "employeeId": "EMP002",
+    "firstName": "Mike",
+    "lastName": "Chen",
+    "email": "mike.chen@techcorp.com",
+    "phone": "+1 (555) 234-5678",
+    "position": "Engineering Manager",
+    "department": "Engineering",
+    "team": "Frontend Team",
+    "managerId": null,
+    "location": "San Francisco, CA",
+    "startDate": "2020-01-10",
+    "employmentType": "full-time",
+    "status": "active",
+    "avatar": null,
+    "profile": {
+      "overview": {
+        "bio": "Engineering manager with 8+ years of experience in software development and team leadership. Passionate about building high-performing teams and scalable systems.",
+        "linkedin": "https://linkedin.com/in/mikechen",
+        "github": "https://github.com/mikechen",
+        "website": null,
+        "timezone": "PST",
+        "preferredLanguage": "en"
+      },
+      "competences": {
+        "technical": [
+          {
+            "category": "Full Stack Development",
+            "skills": [
+              {
+                "name": "React",
+                "level": "Expert",
+                "yearsOfExperience": 6,
+                "lastUsed": "2024-01-15",
+                "certifications": [],
+                "projects": ["Multiple Enterprise Applications"]
+              },
+              {
+                "name": "Node.js",
+                "level": "Expert",
+                "yearsOfExperience": 7,
+                "lastUsed": "2024-01-15",
+                "certifications": [],
+                "projects": ["Microservices Architecture", "API Gateway"]
+              },
+              {
+                "name": "PostgreSQL",
+                "level": "Advanced",
+                "yearsOfExperience": 5,
+                "lastUsed": "2024-01-15",
+                "certifications": [],
+                "projects": ["Database Design", "Performance Optimization"]
+              }
+            ]
+          }
+        ],
+        "soft": [
+          {
+            "name": "Leadership",
+            "level": "Expert",
+            "description": "5+ years of team leadership and management experience"
+          },
+          {
+            "name": "Strategic Planning",
+            "level": "Advanced",
+            "description": "Experience in technical strategy and roadmap planning"
+          }
+        ]
+      },
+      "enrichment": {
+        "lastEnriched": "2024-01-12T09:15:00Z",
+        "sources": ["linkedin", "github"],
+        "valueProposition": "Experienced engineering manager with strong technical background and proven leadership skills. Expert in full-stack development and team management.",
+        "recommendations": [
+          "Consider executive leadership training",
+          "Explore advanced architecture patterns",
+          "Develop business strategy skills"
+        ]
+      }
+    },
+    "trainingHistory": [
+      {
+        "id": "training_004",
+        "title": "Leadership Excellence",
+        "trainer": "Lisa Anderson",
+        "completedDate": "2023-10-30",
+        "score": 92,
+        "certificate": "cert_003",
+        "skills": ["Leadership", "Team Management", "Strategic Planning"]
+      }
+    ],
+    "currentTrainings": [],
+    "skillGaps": [
+      {
+        "skill": "Business Strategy",
+        "requiredLevel": "Intermediate",
+        "currentLevel": "Beginner",
+        "priority": "medium",
+        "recommendedCourses": ["Business Strategy Fundamentals", "Strategic Planning"]
+      }
+    ],
+    "relevanceScore": 94,
+    "performance": {
+      "overall": 4.6,
+      "technical": 4.7,
+      "communication": 4.5,
+      "leadership": 4.8,
+      "lastReview": "2023-12-20"
+    },
+    "createdAt": "2020-01-10T00:00:00Z",
+    "updatedAt": "2024-01-12T09:15:00Z",
+    "isActive": true
+  }
+]

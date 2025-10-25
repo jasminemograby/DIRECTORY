@@ -1,0 +1,379 @@
+{
+  "project": {
+    "name": "Directory Microservice MVP",
+    "description": "B2B SaaS corporate learning platform organizational backbone microservice",
+    "version": "1.0.0",
+    "created": "2024-12-19",
+    "status": "completed"
+  },
+  "milestones": [
+    {
+      "id": "discovery-complete",
+      "title": "Project Discovery & Requirements Gathering",
+      "description": "Complete understanding of Directory microservice requirements, user workflows, and technical constraints",
+      "dependencies": [],
+      "artifacts": [
+        "01-Project-Initialization-Template.md",
+        "02-Requirements-Gathering-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Product vision and purpose defined",
+        "User personas and workflows mapped",
+        "Business model and scale understood",
+        "Technical constraints identified",
+        "Mock vs real API decisions made",
+        "Success criteria established"
+      ]
+    },
+    {
+      "id": "architecture-design",
+      "title": "System Architecture & Database Design",
+      "description": "Design Onion Architecture, database schema, and integration patterns with mock fallback mechanisms",
+      "dependencies": ["discovery-complete"],
+      "artifacts": [
+        "03-Architecture-Decision-Template.md",
+        "07-Data-Model-&-Database-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Onion Architecture layers defined",
+        "Database schema designed with multi-tenancy",
+        "Mock data structures planned",
+        "Integration patterns established",
+        "Rollback mechanisms designed"
+      ]
+    },
+    {
+      "id": "ui-ux-design",
+      "title": "UI/UX Design System & Visual Framework",
+      "description": "Create comprehensive design system using dark emerald theme with organizational hierarchy visualization",
+      "dependencies": ["discovery-complete"],
+      "artifacts": [
+        "04-UI-UX-Design-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Dark emerald design system implemented",
+        "Component library created",
+        "Organizational hierarchy UI designed",
+        "Responsive layouts planned",
+        "Accessibility features included"
+      ]
+    },
+    {
+      "id": "environment-setup",
+      "title": "Development Environment & Repository Structure",
+      "description": "Initialize monorepo structure, Git configuration, and development environment setup",
+      "dependencies": ["architecture-design"],
+      "artifacts": [
+        "05-Setup-Environment-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Monorepo structure created",
+        "Git configuration established",
+        "Development environment configured",
+        "Secrets management planned",
+        "Code quality tools setup"
+      ]
+    },
+    {
+      "id": "feature-design",
+      "title": "Feature Design & User Flow Mapping",
+      "description": "Design detailed user flows, wireframes, and API contracts for all Directory features",
+      "dependencies": ["ui-ux-design", "architecture-design"],
+      "artifacts": [
+        "06-Feature-Design-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Company registration flow designed",
+        "Employee profile workflows mapped",
+        "Trainer management flows planned",
+        "Training request workflows defined",
+        "API contracts specified"
+      ]
+    },
+    {
+      "id": "integration-design",
+      "title": "Integration Architecture & Mock Data Design",
+      "description": "Design all 11 internal microservice integrations and external API connections with mock fallbacks",
+      "dependencies": ["feature-design"],
+      "artifacts": [
+        "08-Endpoints-&-Integrations-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Internal microservice integrations designed",
+        "External API integrations planned",
+        "Mock data schemas created",
+        "Rollback mechanisms implemented",
+        "Error handling strategies defined"
+      ]
+    },
+    {
+      "id": "tdd-setup",
+      "title": "Test-Driven Development Framework",
+      "description": "Set up comprehensive testing framework with failing tests for all features",
+      "dependencies": ["integration-design"],
+      "artifacts": [
+        "09-TDD-&-Unit-Tests-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Testing framework configured",
+        "Failing tests created for all features",
+        "Mock data fixtures prepared",
+        "Test coverage targets set",
+        "TDD workflow established"
+      ]
+    },
+    {
+      "id": "implementation",
+      "title": "Core Implementation & Code Generation",
+      "description": "Implement all Directory features following TDD approach with Onion Architecture",
+      "dependencies": ["tdd-setup"],
+      "artifacts": [
+        "10-Implementation-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Domain layer entities implemented",
+        "Application layer services created",
+        "Infrastructure layer adapters built",
+        "Presentation layer components developed",
+        "All tests passing"
+      ]
+    },
+    {
+      "id": "code-review",
+      "title": "Code Review & Refactoring",
+      "description": "Perform comprehensive code review, refactoring, and quality improvements",
+      "dependencies": ["implementation"],
+      "artifacts": [
+        "11-Code-Review-&-Refactor-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Code quality review completed",
+        "Security vulnerabilities addressed",
+        "Performance optimizations applied",
+        "Architecture compliance verified",
+        "Documentation updated"
+      ]
+    },
+    {
+      "id": "integration-testing",
+      "title": "Integration & End-to-End Testing",
+      "description": "Comprehensive testing of all integrations, mock fallbacks, and user workflows",
+      "dependencies": ["code-review"],
+      "artifacts": [
+        "12-Integration-&-E2E-Testing-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Integration tests implemented",
+        "E2E test scenarios created",
+        "Mock fallback testing completed",
+        "Performance testing conducted",
+        "User workflow validation done"
+      ]
+    },
+    {
+      "id": "security-implementation",
+      "title": "Security & Cybersecurity Implementation",
+      "description": "Implement comprehensive security measures, GDPR compliance, and data protection",
+      "dependencies": ["integration-testing"],
+      "artifacts": [
+        "13-Security-&-Cybersecurity-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "GDPR compliance implemented",
+        "Data encryption configured",
+        "Access control mechanisms built",
+        "Audit logging implemented",
+        "Security testing completed"
+      ]
+    },
+    {
+      "id": "deployment-setup",
+      "title": "Deployment & CI/CD Configuration",
+      "description": "Set up automated deployment pipelines for Vercel, Railway, and Supabase",
+      "dependencies": ["security-implementation"],
+      "artifacts": [
+        "14-Deployment-&-CI-CD-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "GitHub Actions workflows created",
+        "Vercel deployment configured",
+        "Railway deployment setup",
+        "Supabase migrations prepared",
+        "Secrets management documented"
+      ]
+    },
+    {
+      "id": "monitoring-setup",
+      "title": "Observability & Monitoring Implementation",
+      "description": "Implement comprehensive logging, monitoring, and alerting systems",
+      "dependencies": ["deployment-setup"],
+      "artifacts": [
+        "15-Observability-&-Monitoring-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Logging system implemented",
+        "Monitoring dashboards created",
+        "Alerting mechanisms configured",
+        "Health checks implemented",
+        "Performance metrics collected"
+      ]
+    },
+    {
+      "id": "maintenance-planning",
+      "title": "Maintenance & Rollout Planning",
+      "description": "Create comprehensive maintenance runbook and rollout strategy",
+      "dependencies": ["monitoring-setup"],
+      "artifacts": [
+        "16-Maintenance-&-Rollout-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "Maintenance runbook created",
+        "Rollback procedures documented",
+        "Versioning strategy established",
+        "Feature rollout plan created",
+        "Support procedures defined"
+      ]
+    },
+    {
+      "id": "final-validation",
+      "title": "Final Validation & Handover",
+      "description": "Comprehensive system validation, documentation completion, and production readiness",
+      "dependencies": ["maintenance-planning"],
+      "artifacts": [
+        "17-Final-Validation-&-Handover-Template.md"
+      ],
+      "done": true,
+      "strictly_immutable": true,
+      "checklist": [
+        "System validation completed",
+        "Documentation finalized",
+        "Production readiness confirmed",
+        "Handover materials prepared",
+        "Support plan established"
+      ]
+    }
+  ],
+  "feature_backlog": [
+    {
+      "id": "company-registration",
+      "title": "Company Registration & Onboarding",
+      "priority": "critical",
+      "description": "Complete company registration flow with detailed form, hierarchy setup, and employee import",
+      "estimated_effort": "high",
+      "dependencies": ["architecture-design", "ui-ux-design"]
+    },
+    {
+      "id": "employee-profiles",
+      "title": "Employee Profile Management",
+      "priority": "critical",
+      "description": "Comprehensive employee profiles with external data enrichment and role-based access",
+      "estimated_effort": "high",
+      "dependencies": ["company-registration"]
+    },
+    {
+      "id": "trainer-management",
+      "title": "Trainer Profile & Management",
+      "priority": "high",
+      "description": "Trainer profiles with content permissions, teaching history, and skill verification",
+      "estimated_effort": "medium",
+      "dependencies": ["employee-profiles"]
+    },
+    {
+      "id": "training-requests",
+      "title": "Training Request Workflows",
+      "priority": "high",
+      "description": "Career-path, skill-driven, and instructor-led training request flows",
+      "estimated_effort": "medium",
+      "dependencies": ["trainer-management"]
+    },
+    {
+      "id": "rbac-system",
+      "title": "Role-Based Access Control",
+      "priority": "critical",
+      "description": "HR → Manager → Team Lead → Employee hierarchy with proper permissions",
+      "estimated_effort": "medium",
+      "dependencies": ["employee-profiles"]
+    },
+    {
+      "id": "external-integrations",
+      "title": "External API Integrations",
+      "priority": "medium",
+      "description": "LinkedIn, GitHub, Credly, YouTube, ORCID, Crossref, Gemini API integrations",
+      "estimated_effort": "high",
+      "dependencies": ["employee-profiles"]
+    },
+    {
+      "id": "internal-integrations",
+      "title": "Internal Microservice Integrations",
+      "priority": "high",
+      "description": "Integration with Auth, Skills Engine, Marketplace, Content Studio, and other services",
+      "estimated_effort": "high",
+      "dependencies": ["training-requests"]
+    },
+    {
+      "id": "notification-system",
+      "title": "Notification & Communication System",
+      "priority": "medium",
+      "description": "SendPulse in-app notifications and SendGrid email integration",
+      "estimated_effort": "low",
+      "dependencies": ["rbac-system"]
+    }
+  ],
+  "technical_decisions": {
+    "architecture": "Onion Architecture (Clean Architecture)",
+    "frontend": "React + Tailwind CSS with dark emerald design system",
+    "backend": "Node.js + Express with minimal backend mode",
+    "database": "PostgreSQL + Supabase with multi-tenancy",
+    "communication": "REST-only, no WebSockets or message queues",
+    "testing": "Jest with TDD approach",
+    "deployment": "Vercel (frontend), Railway (backend), Supabase (database)",
+    "ci_cd": "GitHub Actions with automated workflows",
+    "monitoring": "Comprehensive logging and observability",
+    "security": "GDPR compliance with data encryption and audit logging"
+  },
+  "constraints": {
+    "authentication": "External Auth Service, Directory starts after login",
+    "inheritance": "Managers, trainers, team leaders inherit employee capabilities",
+    "data_editing": "Only HR admins can edit employee data",
+    "mock_mode": "All integrations start in mock mode with JSON rollback",
+    "visual_priority": "Highly visual UI/UX with organizational hierarchy focus",
+    "architecture": "Strict Onion Architecture compliance",
+    "communication": "REST-only, no additional frameworks"
+  },
+  "success_metrics": {
+    "functional_completeness": "All major flows work end-to-end",
+    "integration_reliability": "Graceful fallback to mock data on failures",
+    "data_accuracy": "Consistent company/employee data across all roles",
+    "usability": "All user types can complete tasks without errors",
+    "architecture_compliance": "Proper Onion Architecture implementation",
+    "visual_excellence": "Fully designed UI reflecting organizational hierarchy"
+  }
+}

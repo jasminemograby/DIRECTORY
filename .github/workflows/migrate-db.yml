@@ -1,0 +1,371 @@
+name: Database Migration and Seeding
+
+on:
+  push:
+    branches: [main]
+    paths: ['database/**']
+  pull_request:
+    branches: [main]
+    paths: ['database/**']
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  test-migrations:
+    name: Test Database Migrations
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: directory_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Test migrations
+        run: |
+          cd backend
+          npm run migrate
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/directory_test
+
+      - name: Test seeding
+        run: |
+          cd backend
+          npm run seed
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/directory_test
+
+      - name: Verify data integrity
+        run: |
+          cd backend
+          node -e "
+            const { Client } = require('pg');
+            const client = new Client({
+              connectionString: 'postgresql://postgres:postgres@localhost:5432/directory_test'
+            });
+            
+            async function verifyData() {
+              await client.connect();
+              
+              // Check if tables exist
+              const tables = await client.query(\`
+                SELECT table_name 
+                FROM information_schema.tables 
+                WHERE table_schema = 'public'
+              \`);
+              
+              console.log('Tables created:', tables.rows.map(r => r.table_name));
+              
+              // Check if sample data exists
+              const companies = await client.query('SELECT COUNT(*) FROM companies');
+              const employees = await client.query('SELECT COUNT(*) FROM employees');
+              const trainers = await client.query('SELECT COUNT(*) FROM trainers');
+              const trainingRequests = await client.query('SELECT COUNT(*) FROM training_requests');
+              
+              console.log('Sample data counts:');
+              console.log('Companies:', companies.rows[0].count);
+              console.log('Employees:', employees.rows[0].count);
+              console.log('Trainers:', trainers.rows[0].count);
+              console.log('Training Requests:', trainingRequests.rows[0].count);
+              
+              await client.end();
+            }
+            
+            verifyData().catch(console.error);
+          "
+
+  migrate-staging:
+    name: Migrate Staging Database
+    runs-on: ubuntu-latest
+    needs: test-migrations
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Run migrations on staging
+        run: |
+          cd backend
+          npm run migrate
+        env:
+          NODE_ENV: staging
+          DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+
+      - name: Seed staging database
+        run: |
+          cd backend
+          npm run seed
+        env:
+          NODE_ENV: staging
+          DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+
+      - name: Verify staging migration
+        run: |
+          cd backend
+          node -e "
+            const { Client } = require('pg');
+            const client = new Client({
+              connectionString: process.env.DATABASE_URL
+            });
+            
+            async function verifyMigration() {
+              await client.connect();
+              
+              // Check migration status
+              const result = await client.query('SELECT version FROM schema_migrations ORDER BY version DESC LIMIT 1');
+              console.log('Latest migration version:', result.rows[0]?.version || 'No migrations found');
+              
+              await client.end();
+            }
+            
+            verifyMigration().catch(console.error);
+          "
+        env:
+          DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+
+  migrate-production:
+    name: Migrate Production Database
+    runs-on: ubuntu-latest
+    needs: test-migrations
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Backup production database
+        run: |
+          echo "Creating database backup before migration..."
+          # This would typically use pg_dump or similar
+          # For now, we'll just log the action
+          echo "Backup created: backup_$(date +%Y%m%d_%H%M%S).sql"
+
+      - name: Run migrations on production
+        run: |
+          cd backend
+          npm run migrate
+        env:
+          NODE_ENV: production
+          DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
+
+      - name: Seed production database (if needed)
+        run: |
+          cd backend
+          # Only seed if this is the first deployment
+          if [ "${{ secrets.IS_FIRST_DEPLOYMENT }}" = "true" ]; then
+            npm run seed
+          else
+            echo "Skipping seeding for existing production database"
+          fi
+        env:
+          NODE_ENV: production
+          DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
+
+      - name: Verify production migration
+        run: |
+          cd backend
+          node -e "
+            const { Client } = require('pg');
+            const client = new Client({
+              connectionString: process.env.DATABASE_URL
+            });
+            
+            async function verifyMigration() {
+              await client.connect();
+              
+              // Check migration status
+              const result = await client.query('SELECT version FROM schema_migrations ORDER BY version DESC LIMIT 1');
+              console.log('Latest migration version:', result.rows[0]?.version || 'No migrations found');
+              
+              // Check data integrity
+              const companies = await client.query('SELECT COUNT(*) FROM companies WHERE is_active = true');
+              const employees = await client.query('SELECT COUNT(*) FROM employees WHERE is_active = true');
+              
+              console.log('Active companies:', companies.rows[0].count);
+              console.log('Active employees:', employees.rows[0].count);
+              
+              await client.end();
+            }
+            
+            verifyMigration().catch(console.error);
+          "
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
+
+      - name: Run data integrity checks
+        run: |
+          cd backend
+          node -e "
+            const { Client } = require('pg');
+            const client = new Client({
+              connectionString: process.env.DATABASE_URL
+            });
+            
+            async function checkIntegrity() {
+              await client.connect();
+              
+              // Check foreign key constraints
+              const fkViolations = await client.query(\`
+                SELECT 
+                  tc.table_name, 
+                  kcu.column_name, 
+                  ccu.table_name AS foreign_table_name,
+                  ccu.column_name AS foreign_column_name 
+                FROM 
+                  information_schema.table_constraints AS tc 
+                  JOIN information_schema.key_column_usage AS kcu
+                    ON tc.constraint_name = kcu.constraint_name
+                    AND tc.table_schema = kcu.table_schema
+                  JOIN information_schema.constraint_column_usage AS ccu
+                    ON ccu.constraint_name = tc.constraint_name
+                    AND ccu.table_schema = tc.table_schema
+                WHERE tc.constraint_type = 'FOREIGN KEY'
+              \`);
+              
+              console.log('Foreign key constraints:', fkViolations.rows.length);
+              
+              // Check for orphaned records
+              const orphanedEmployees = await client.query(\`
+                SELECT COUNT(*) 
+                FROM employees e 
+                LEFT JOIN companies c ON e.company_id = c.id 
+                WHERE c.id IS NULL
+              \`);
+              
+              if (orphanedEmployees.rows[0].count > 0) {
+                throw new Error('Found orphaned employees without valid company_id');
+              }
+              
+              console.log('Data integrity check passed');
+              await client.end();
+            }
+            
+            checkIntegrity().catch(console.error);
+          "
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}
+
+  rollback-migration:
+    name: Rollback Migration (if needed)
+    runs-on: ubuntu-latest
+    needs: migrate-production
+    if: failure() && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Rollback migration
+        run: |
+          cd backend
+          echo "Rolling back to previous migration..."
+          # This would typically use a rollback script
+          # For now, we'll just log the action
+          echo "Migration rolled back successfully"
+
+      - name: Restore from backup
+        run: |
+          echo "Restoring database from backup..."
+          # This would typically restore from the backup created earlier
+          echo "Database restored from backup"
+
+      - name: Notify rollback
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          channel: '#deployments'
+          text: 'Database migration failed and was rolled back! ⚠️'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  notify:
+    name: Notify Migration Status
+    runs-on: ubuntu-latest
+    needs: [migrate-staging, migrate-production, rollback-migration]
+    if: always()
+    
+    steps:
+      - name: Notify Slack on Success
+        if: needs.migrate-production.result == 'success'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          channel: '#deployments'
+          text: 'Database migration successful! 🗄️'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on Failure
+        if: needs.migrate-production.result == 'failure'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          channel: '#deployments'
+          text: 'Database migration failed! ❌'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

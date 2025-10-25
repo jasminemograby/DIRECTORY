@@ -1,0 +1,237 @@
+[
+  {
+    "id": "trainer_001",
+    "name": "Dr. Sarah Wilson",
+    "title": "Senior Data Science Instructor",
+    "email": "sarah.wilson@company.com",
+    "phone": "+1 (555) 987-6543",
+    "bio": "Experienced data scientist with 10+ years in machine learning and AI. PhD in Computer Science from Stanford University.",
+    "avatar": null,
+    "trainerType": "internal",
+    "teachingMode": "online",
+    "specializations": [
+      "Machine Learning",
+      "Deep Learning",
+      "Data Analysis",
+      "Python Programming",
+      "Statistics"
+    ],
+    "certifications": [
+      {
+        "name": "AWS Machine Learning Specialty",
+        "issuer": "Amazon",
+        "date": "2023-08-15",
+        "credentialId": "AWS-ML-001"
+      },
+      {
+        "name": "Google Cloud ML Engineer",
+        "issuer": "Google",
+        "date": "2023-05-20",
+        "credentialId": "GCP-ML-001"
+      },
+      {
+        "name": "Certified Data Scientist",
+        "issuer": "Data Science Council",
+        "date": "2022-12-10",
+        "credentialId": "CDS-001"
+      }
+    ],
+    "languages": ["English", "Spanish"],
+    "availability": {
+      "timezone": "PST",
+      "schedule": [
+        { "day": "Monday", "hours": "9:00 AM - 5:00 PM" },
+        { "day": "Tuesday", "hours": "9:00 AM - 5:00 PM" },
+        { "day": "Wednesday", "hours": "9:00 AM - 5:00 PM" },
+        { "day": "Thursday", "hours": "9:00 AM - 5:00 PM" },
+        { "day": "Friday", "hours": "9:00 AM - 3:00 PM" }
+      ]
+    },
+    "pricing": {
+      "hourlyRate": 150,
+      "courseRate": 299,
+      "currency": "USD"
+    },
+    "aiEditing": {
+      "enabled": true,
+      "lastEdited": "2024-01-10T14:30:00Z",
+      "version": "2.1"
+    },
+    "publishPermission": {
+      "canPublish": true,
+      "approvedBy": "admin_001",
+      "approvedDate": "2023-12-01T00:00:00Z"
+    },
+    "rating": {
+      "average": 4.8,
+      "count": 127,
+      "breakdown": {
+        "5": 98,
+        "4": 25,
+        "3": 3,
+        "2": 1,
+        "1": 0
+      }
+    },
+    "courses": [
+      {
+        "id": "course_001",
+        "title": "Machine Learning Fundamentals",
+        "description": "Introduction to ML algorithms and techniques",
+        "duration": "40 hours",
+        "level": "Beginner",
+        "students": 245,
+        "rating": 4.7,
+        "price": 299,
+        "status": "active"
+      },
+      {
+        "id": "course_002",
+        "title": "Advanced Deep Learning",
+        "description": "Deep neural networks and advanced architectures",
+        "duration": "60 hours",
+        "level": "Advanced",
+        "students": 89,
+        "rating": 4.9,
+        "price": 499,
+        "status": "active"
+      }
+    ],
+    "recentReviews": [
+      {
+        "id": "review_001",
+        "student": "Alex Thompson",
+        "rating": 5,
+        "comment": "Excellent instructor! Very knowledgeable and patient.",
+        "date": "2024-01-10",
+        "course": "Machine Learning Fundamentals"
+      },
+      {
+        "id": "review_002",
+        "student": "Maria Garcia",
+        "rating": 5,
+        "comment": "Great course structure and practical examples.",
+        "date": "2024-01-08",
+        "course": "Advanced Deep Learning"
+      }
+    ],
+    "teachingExperience": "8 years",
+    "createdAt": "2023-01-15T00:00:00Z",
+    "updatedAt": "2024-01-10T14:30:00Z",
+    "isActive": true
+  },
+  {
+    "id": "trainer_002",
+    "name": "Prof. Michael Brown",
+    "title": "Cloud Architecture Expert",
+    "email": "michael.brown@company.com",
+    "phone": "+1 (555) 876-5432",
+    "bio": "Cloud architecture specialist with 12+ years of experience in AWS, Azure, and Google Cloud. Former solutions architect at major tech companies.",
+    "avatar": null,
+    "trainerType": "external",
+    "teachingMode": "hybrid",
+    "specializations": [
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "DevOps",
+      "Microservices",
+      "Container Orchestration"
+    ],
+    "certifications": [
+      {
+        "name": "AWS Solutions Architect Professional",
+        "issuer": "Amazon",
+        "date": "2023-06-15",
+        "credentialId": "AWS-SA-001"
+      },
+      {
+        "name": "Azure Solutions Architect Expert",
+        "issuer": "Microsoft",
+        "date": "2023-04-20",
+        "credentialId": "AZURE-SA-001"
+      },
+      {
+        "name": "Google Cloud Professional Architect",
+        "issuer": "Google",
+        "date": "2023-02-10",
+        "credentialId": "GCP-ARCH-001"
+      }
+    ],
+    "languages": ["English"],
+    "availability": {
+      "timezone": "EST",
+      "schedule": [
+        { "day": "Monday", "hours": "10:00 AM - 6:00 PM" },
+        { "day": "Tuesday", "hours": "10:00 AM - 6:00 PM" },
+        { "day": "Wednesday", "hours": "10:00 AM - 6:00 PM" },
+        { "day": "Thursday", "hours": "10:00 AM - 6:00 PM" },
+        { "day": "Friday", "hours": "10:00 AM - 4:00 PM" }
+      ]
+    },
+    "pricing": {
+      "hourlyRate": 200,
+      "courseRate": 599,
+      "currency": "USD"
+    },
+    "aiEditing": {
+      "enabled": false,
+      "lastEdited": null,
+      "version": "1.0"
+    },
+    "publishPermission": {
+      "canPublish": true,
+      "approvedBy": "admin_001",
+      "approvedDate": "2023-11-15T00:00:00Z"
+    },
+    "rating": {
+      "average": 4.6,
+      "count": 89,
+      "breakdown": {
+        "5": 65,
+        "4": 20,
+        "3": 3,
+        "2": 1,
+        "1": 0
+      }
+    },
+    "courses": [
+      {
+        "id": "course_003",
+        "title": "AWS Cloud Architecture",
+        "description": "Complete AWS cloud architecture and best practices",
+        "duration": "50 hours",
+        "level": "Intermediate",
+        "students": 156,
+        "rating": 4.6,
+        "price": 599,
+        "status": "active"
+      },
+      {
+        "id": "course_004",
+        "title": "Microservices with Docker",
+        "description": "Building scalable microservices using Docker and Kubernetes",
+        "duration": "45 hours",
+        "level": "Advanced",
+        "students": 78,
+        "rating": 4.8,
+        "price": 699,
+        "status": "active"
+      }
+    ],
+    "recentReviews": [
+      {
+        "id": "review_003",
+        "student": "David Lee",
+        "rating": 5,
+        "comment": "Outstanding course! Very practical and well-structured.",
+        "date": "2024-01-05",
+        "course": "AWS Cloud Architecture"
+      }
+    ],
+    "teachingExperience": "6 years",
+    "createdAt": "2023-03-20T00:00:00Z",
+    "updatedAt": "2024-01-05T16:45:00Z",
+    "isActive": true
+  }
+]

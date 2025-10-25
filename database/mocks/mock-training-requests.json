@@ -1,0 +1,250 @@
+[
+  {
+    "id": "req_001",
+    "employeeId": "emp_001",
+    "employee": {
+      "id": "emp_001",
+      "name": "Sarah Johnson",
+      "email": "sarah.johnson@techcorp.com",
+      "department": "Engineering",
+      "position": "Senior Software Engineer"
+    },
+    "course": {
+      "id": "course_005",
+      "title": "Advanced React Development",
+      "description": "Advanced React patterns, performance optimization, and modern development practices",
+      "duration": "40 hours",
+      "level": "Advanced"
+    },
+    "trainer": {
+      "id": "trainer_003",
+      "name": "Dr. Mike Chen",
+      "email": "mike.chen@company.com"
+    },
+    "requestDetails": {
+      "justification": "Need to upgrade skills for upcoming project requirements. The team is moving to React 18 and implementing advanced patterns for better performance.",
+      "businessImpact": "Will improve development velocity and code quality for the new e-commerce platform project.",
+      "expectedOutcome": "Master advanced React patterns and performance optimization techniques.",
+      "timeline": "Need to complete training before project kickoff in March 2024."
+    },
+    "schedule": {
+      "preferredStartDate": "2024-02-01",
+      "preferredEndDate": "2024-02-15",
+      "preferredTimeSlots": ["9:00 AM - 12:00 PM", "2:00 PM - 5:00 PM"],
+      "timezone": "PST",
+      "flexibility": "moderate"
+    },
+    "cost": {
+      "courseFee": 1200,
+      "materials": 50,
+      "total": 1250,
+      "currency": "USD",
+      "budgetCode": "ENG-TRAINING-2024"
+    },
+    "approval": {
+      "status": "pending",
+      "requestedDate": "2024-01-10T09:30:00Z",
+      "approverId": null,
+      "approverName": null,
+      "approvedDate": null,
+      "rejectionReason": null,
+      "comments": []
+    },
+    "priority": "high",
+    "department": "Engineering",
+    "tags": ["react", "frontend", "performance", "advanced"],
+    "attachments": [],
+    "status": "pending",
+    "createdAt": "2024-01-10T09:30:00Z",
+    "updatedAt": "2024-01-10T09:30:00Z"
+  },
+  {
+    "id": "req_002",
+    "employeeId": "emp_002",
+    "employee": {
+      "id": "emp_002",
+      "name": "Alex Thompson",
+      "email": "alex.thompson@techcorp.com",
+      "department": "Product",
+      "position": "Product Manager"
+    },
+    "course": {
+      "id": "course_006",
+      "title": "Project Management Fundamentals",
+      "description": "Essential project management skills, methodologies, and tools for successful project delivery",
+      "duration": "30 hours",
+      "level": "Intermediate"
+    },
+    "trainer": {
+      "id": "trainer_004",
+      "name": "Lisa Anderson",
+      "email": "lisa.anderson@company.com"
+    },
+    "requestDetails": {
+      "justification": "Required for new role as team lead. Need to formalize project management skills to effectively manage the product development team.",
+      "businessImpact": "Will improve project delivery timelines and team coordination for product initiatives.",
+      "expectedOutcome": "Gain certification in project management and improve team leadership skills.",
+      "timeline": "Complete training before taking on team lead responsibilities in February 2024."
+    },
+    "schedule": {
+      "preferredStartDate": "2024-01-20",
+      "preferredEndDate": "2024-01-25",
+      "preferredTimeSlots": ["10:00 AM - 4:00 PM"],
+      "timezone": "PST",
+      "flexibility": "low"
+    },
+    "cost": {
+      "courseFee": 800,
+      "materials": 25,
+      "total": 825,
+      "currency": "USD",
+      "budgetCode": "PROD-TRAINING-2024"
+    },
+    "approval": {
+      "status": "approved",
+      "requestedDate": "2024-01-08T14:20:00Z",
+      "approverId": "mgr_001",
+      "approverName": "John Smith",
+      "approvedDate": "2024-01-09T10:15:00Z",
+      "rejectionReason": null,
+      "comments": [
+        {
+          "author": "John Smith",
+          "comment": "Approved. This training aligns with the team lead promotion and will benefit the entire product team.",
+          "date": "2024-01-09T10:15:00Z"
+        }
+      ]
+    },
+    "priority": "medium",
+    "department": "Product",
+    "tags": ["project-management", "leadership", "certification"],
+    "attachments": [],
+    "status": "approved",
+    "createdAt": "2024-01-08T14:20:00Z",
+    "updatedAt": "2024-01-09T10:15:00Z"
+  },
+  {
+    "id": "req_003",
+    "employeeId": "emp_003",
+    "employee": {
+      "id": "emp_003",
+      "name": "Maria Garcia",
+      "email": "maria.garcia@techcorp.com",
+      "department": "Analytics",
+      "position": "Data Analyst"
+    },
+    "course": {
+      "id": "course_007",
+      "title": "Data Science with Python",
+      "description": "Complete data science workflow using Python, including data analysis, visualization, and machine learning",
+      "duration": "50 hours",
+      "level": "Intermediate"
+    },
+    "trainer": {
+      "id": "trainer_001",
+      "name": "Dr. Sarah Wilson",
+      "email": "sarah.wilson@company.com"
+    },
+    "requestDetails": {
+      "justification": "Personal development interest. Want to expand skills beyond basic analytics to include machine learning and advanced data science techniques.",
+      "businessImpact": "Could potentially contribute to advanced analytics projects and provide insights for business decisions.",
+      "expectedOutcome": "Learn Python for data science and gain practical experience with machine learning algorithms.",
+      "timeline": "Flexible timeline, prefer to complete within 3 months."
+    },
+    "schedule": {
+      "preferredStartDate": "2024-01-15",
+      "preferredEndDate": "2024-02-15",
+      "preferredTimeSlots": ["6:00 PM - 9:00 PM"],
+      "timezone": "PST",
+      "flexibility": "high"
+    },
+    "cost": {
+      "courseFee": 1500,
+      "materials": 75,
+      "total": 1575,
+      "currency": "USD",
+      "budgetCode": "ANALYTICS-TRAINING-2024"
+    },
+    "approval": {
+      "status": "rejected",
+      "requestedDate": "2024-01-05T11:45:00Z",
+      "approverId": "mgr_002",
+      "approverName": "Jane Doe",
+      "approvedDate": null,
+      "rejectionReason": "Budget constraints for Q1 2024. This training is not directly related to current role requirements. Consider applying for Q2 budget.",
+      "comments": [
+        {
+          "author": "Jane Doe",
+          "comment": "While this is valuable training, we need to prioritize training that directly supports current business objectives. Please reapply for Q2 budget.",
+          "date": "2024-01-07T16:30:00Z"
+        }
+      ]
+    },
+    "priority": "low",
+    "department": "Analytics",
+    "tags": ["data-science", "python", "machine-learning", "personal-development"],
+    "attachments": [],
+    "status": "rejected",
+    "createdAt": "2024-01-05T11:45:00Z",
+    "updatedAt": "2024-01-07T16:30:00Z"
+  },
+  {
+    "id": "req_004",
+    "employeeId": "emp_004",
+    "employee": {
+      "id": "emp_004",
+      "name": "David Lee",
+      "email": "david.lee@techcorp.com",
+      "department": "Engineering",
+      "position": "DevOps Engineer"
+    },
+    "course": {
+      "id": "course_003",
+      "title": "AWS Cloud Architecture",
+      "description": "Complete AWS cloud architecture and best practices for scalable applications",
+      "duration": "50 hours",
+      "level": "Intermediate"
+    },
+    "trainer": {
+      "id": "trainer_002",
+      "name": "Prof. Michael Brown",
+      "email": "michael.brown@company.com"
+    },
+    "requestDetails": {
+      "justification": "Critical for cloud migration project. The team is moving our infrastructure to AWS and need advanced knowledge of cloud architecture patterns.",
+      "businessImpact": "Essential for successful completion of the cloud migration project that will reduce infrastructure costs by 30%.",
+      "expectedOutcome": "Master AWS cloud architecture and be able to design scalable, cost-effective cloud solutions.",
+      "timeline": "Must complete before cloud migration project starts in March 2024."
+    },
+    "schedule": {
+      "preferredStartDate": "2024-02-10",
+      "preferredEndDate": "2024-02-24",
+      "preferredTimeSlots": ["9:00 AM - 5:00 PM"],
+      "timezone": "PST",
+      "flexibility": "low"
+    },
+    "cost": {
+      "courseFee": 1800,
+      "materials": 100,
+      "total": 1900,
+      "currency": "USD",
+      "budgetCode": "ENG-TRAINING-2024"
+    },
+    "approval": {
+      "status": "pending",
+      "requestedDate": "2024-01-12T13:15:00Z",
+      "approverId": null,
+      "approverName": null,
+      "approvedDate": null,
+      "rejectionReason": null,
+      "comments": []
+    },
+    "priority": "high",
+    "department": "Engineering",
+    "tags": ["aws", "cloud", "architecture", "migration"],
+    "attachments": [],
+    "status": "pending",
+    "createdAt": "2024-01-12T13:15:00Z",
+    "updatedAt": "2024-01-12T13:15:00Z"
+  }
+]

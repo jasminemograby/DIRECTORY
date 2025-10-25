@@ -1,0 +1,31 @@
+{
+  "name": "directory-shared",
+  "version": "1.0.0",
+  "description": "Shared utilities, constants, and validation schemas for Directory Microservice",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'No build step required for JavaScript'",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "format": "prettier --write \"src/**/*.js\""
+  },
+  "dependencies": {
+    "joi": "^17.11.0",
+    "uuid": "^9.0.1",
+    "date-fns": "^2.30.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

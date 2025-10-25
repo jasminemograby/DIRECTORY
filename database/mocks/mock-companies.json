@@ -1,0 +1,104 @@
+[
+  {
+    "id": "comp_001",
+    "name": "TechCorp Solutions",
+    "domain": "techcorp.com",
+    "industry": "Technology",
+    "size": "500-1000",
+    "location": "San Francisco, CA",
+    "founded": "2015-03-15",
+    "description": "Leading technology solutions provider specializing in enterprise software development and digital transformation.",
+    "website": "https://www.techcorp.com",
+    "logo": null,
+    "settings": {
+      "timezone": "PST",
+      "currency": "USD",
+      "language": "en",
+      "features": {
+        "analytics": true,
+        "reporting": true,
+        "integrations": true,
+        "customBranding": false
+      }
+    },
+    "subscription": {
+      "plan": "enterprise",
+      "status": "active",
+      "startDate": "2023-01-01",
+      "endDate": "2024-12-31",
+      "maxEmployees": 1000,
+      "maxTrainers": 50
+    },
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2024-01-15T10:30:00Z",
+    "isActive": true
+  },
+  {
+    "id": "comp_002",
+    "name": "Global Finance Inc",
+    "domain": "globalfinance.com",
+    "industry": "Financial Services",
+    "size": "1000-5000",
+    "location": "New York, NY",
+    "founded": "2010-08-22",
+    "description": "International financial services company providing investment banking, asset management, and wealth management services.",
+    "website": "https://www.globalfinance.com",
+    "logo": null,
+    "settings": {
+      "timezone": "EST",
+      "currency": "USD",
+      "language": "en",
+      "features": {
+        "analytics": true,
+        "reporting": true,
+        "integrations": true,
+        "customBranding": true
+      }
+    },
+    "subscription": {
+      "plan": "premium",
+      "status": "active",
+      "startDate": "2023-06-01",
+      "endDate": "2024-05-31",
+      "maxEmployees": 5000,
+      "maxTrainers": 100
+    },
+    "createdAt": "2023-06-01T00:00:00Z",
+    "updatedAt": "2024-01-10T14:20:00Z",
+    "isActive": true
+  },
+  {
+    "id": "comp_003",
+    "name": "HealthTech Innovations",
+    "domain": "healthtech.com",
+    "industry": "Healthcare Technology",
+    "size": "100-500",
+    "location": "Boston, MA",
+    "founded": "2018-11-05",
+    "description": "Innovative healthcare technology company developing AI-powered diagnostic tools and patient management systems.",
+    "website": "https://www.healthtech.com",
+    "logo": null,
+    "settings": {
+      "timezone": "EST",
+      "currency": "USD",
+      "language": "en",
+      "features": {
+        "analytics": true,
+        "reporting": false,
+        "integrations": true,
+        "customBranding": false
+      }
+    },
+    "subscription": {
+      "plan": "professional",
+      "status": "active",
+      "startDate": "2023-09-15",
+      "endDate": "2024-09-14",
+      "maxEmployees": 500,
+      "maxTrainers": 25
+    },
+    "createdAt": "2023-09-15T00:00:00Z",
+    "updatedAt": "2024-01-12T09:15:00Z",
+    "isActive": true
+  }
+]

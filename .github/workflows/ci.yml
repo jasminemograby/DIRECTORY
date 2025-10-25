@@ -1,0 +1,360 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  lint-and-format:
+    name: Lint and Format Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Check frontend linting
+        run: |
+          cd frontend
+          npm ci
+          npm run lint
+
+      - name: Check backend linting
+        run: |
+          cd backend
+          npm ci
+          npm run lint
+
+      - name: Check shared linting
+        run: |
+          cd shared
+          npm ci
+          npm run lint
+
+      - name: Check formatting
+        run: |
+          npm run format -- --check
+
+  test-frontend:
+    name: Test Frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./frontend/coverage/lcov.info
+          flags: frontend
+          name: frontend-coverage
+
+  test-backend:
+    name: Test Backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: directory_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:coverage
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/directory_test
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-jwt-secret
+          USE_MOCK: false
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./backend/coverage/lcov.info
+          flags: backend
+          name: backend-coverage
+
+  test-shared:
+    name: Test Shared
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./shared
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: shared/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./shared/coverage/lcov.info
+          flags: shared
+          name: shared-coverage
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [test-frontend, test-backend, test-shared]
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: directory_integration_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install all dependencies
+        run: |
+          npm ci
+          cd frontend && npm ci
+          cd ../backend && npm ci
+          cd ../shared && npm ci
+
+      - name: Build shared package
+        run: |
+          cd shared
+          npm run build
+
+      - name: Start backend server
+        run: |
+          cd backend
+          npm start &
+          sleep 10
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/directory_integration_test
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: test-jwt-secret
+          USE_MOCK: false
+
+      - name: Run integration tests
+        run: |
+          # Test API endpoints
+          curl -f http://localhost:3001/health || exit 1
+          curl -f http://localhost:3001/api/v1/companies || exit 1
+          curl -f http://localhost:3001/api/v1/employees || exit 1
+          curl -f http://localhost:3001/api/v1/trainers || exit 1
+          curl -f http://localhost:3001/api/v1/training-requests || exit 1
+
+      - name: Test mock data fallback
+        run: |
+          # Test mock data fallback by setting USE_MOCK=true
+          cd backend
+          USE_MOCK=true npm start &
+          sleep 10
+          
+          # Test that mock data is returned
+          response=$(curl -s http://localhost:3001/api/v1/companies)
+          echo $response | jq -e '.source == "mock"' || exit 1
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd frontend && npm ci
+          cd ../backend && npm ci
+          cd ../shared && npm ci
+
+      - name: Run security audit
+        run: |
+          npm audit --audit-level moderate
+          cd frontend && npm audit --audit-level moderate
+          cd ../backend && npm audit --audit-level moderate
+          cd ../shared && npm audit --audit-level moderate
+
+      - name: Run Snyk security scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+  build-check:
+    name: Build Check
+    runs-on: ubuntu-latest
+    needs: [lint-and-format, test-frontend, test-backend, test-shared]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd frontend && npm ci
+          cd ../backend && npm ci
+          cd ../shared && npm ci
+
+      - name: Build shared package
+        run: |
+          cd shared
+          npm run build
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Build backend Docker image
+        run: |
+          cd backend
+          docker build -t directory-backend:test .
+
+      - name: Build frontend Docker image
+        run: |
+          cd frontend
+          docker build -t directory-frontend:test .
+
+  notify:
+    name: Notify CI Status
+    runs-on: ubuntu-latest
+    needs: [lint-and-format, test-frontend, test-backend, test-shared, integration-tests, security-scan, build-check]
+    if: always()
+    
+    steps:
+      - name: Notify Slack on Success
+        if: needs.build-check.result == 'success'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          channel: '#ci'
+          text: 'All CI checks passed! ✅'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on Failure
+        if: needs.build-check.result == 'failure'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          channel: '#ci'
+          text: 'CI checks failed! ❌'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
