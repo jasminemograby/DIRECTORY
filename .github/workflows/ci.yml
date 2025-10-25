@@ -51,9 +51,6 @@ jobs:
   test-frontend:
     name: Test Frontend
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
     
     steps:
       - name: Checkout code
@@ -64,11 +61,16 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: npm ci
+
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: ./frontend
 
       - name: Run tests
         run: npm run test:coverage
+        working-directory: ./frontend
         continue-on-error: true
 
       - name: Upload coverage to Codecov
@@ -82,9 +84,6 @@ jobs:
   test-backend:
     name: Test Backend
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend
     
     services:
       postgres:
@@ -119,11 +118,16 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: npm ci
+
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: ./backend
 
       - name: Run tests
         run: npm run test:coverage
+        working-directory: ./backend
         continue-on-error: true
         env:
           NODE_ENV: test
@@ -143,9 +147,6 @@ jobs:
   test-shared:
     name: Test Shared
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./shared
     
     steps:
       - name: Checkout code
@@ -156,11 +157,16 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: npm ci
+
+      - name: Install shared dependencies
+        run: npm ci
+        working-directory: ./shared
 
       - name: Run tests
         run: npm run test:coverage
+        working-directory: ./shared
         continue-on-error: true
 
       - name: Upload coverage to Codecov
