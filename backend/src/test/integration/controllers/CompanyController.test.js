@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
 import { CompanyController } from '../../../interfaces/http/controllers/CompanyController.js';

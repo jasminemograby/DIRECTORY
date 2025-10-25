@@ -1,14 +1,13 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { logger } from '../../config/logging.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Use a simple path resolution for mock data
+const mockDataPath = path.resolve(process.cwd(), 'database/mocks');
 
 export class MockDataService {
   constructor() {
-    this.mockDataPath = path.join(__dirname, '../../../database/mocks');
+    this.mockDataPath = mockDataPath;
     this.cache = new Map();
   }
 

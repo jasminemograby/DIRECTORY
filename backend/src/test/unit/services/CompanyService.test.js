@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals';
 import { CompanyService } from '../../../application/services/CompanyService.js';
 import { MockDataService } from '../../../infrastructure/mock/MockDataService.js';
 

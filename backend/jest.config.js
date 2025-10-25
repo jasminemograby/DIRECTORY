@@ -1,9 +1,11 @@
 export default {
-  testEnvironment: 'node',
-  moduleNameMapping: {
-    '^(\\.{1,2}/.*)\\.js$': '$1'
+  transform: {
+    '^.+\\.js$': 'babel-jest',
   },
-  transform: {},
+  testEnvironment: 'node',
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
   testMatch: [
     '**/__tests__/**/*.js',
     '**/?(*.)+(spec|test).js'

@@ -1,5 +1,4 @@
 // Test setup for backend
-import { jest } from '@jest/globals';
 
 // Mock environment variables
 process.env.NODE_ENV = 'test';
