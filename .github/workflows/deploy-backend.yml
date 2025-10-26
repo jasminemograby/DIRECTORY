@@ -138,11 +138,12 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: Login to Railway
-        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          echo "${{ secrets.RAILWAY_TOKEN }}" | railway login
 
       - name: Deploy to staging
         run: |
-          railway up --service backend-staging
+          railway up --detach
         env:
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
 
@@ -165,11 +166,12 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: Login to Railway
-        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          echo "${{ secrets.RAILWAY_TOKEN }}" | railway login
 
       - name: Deploy to production
         run: |
-          railway up --service backend-production
+          railway up --detach
         env:
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
 
@@ -200,17 +202,18 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: Login to Railway
-        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          echo "${{ secrets.RAILWAY_TOKEN }}" | railway login
 
       - name: Enable mock data mode
         run: |
-          railway variables set USE_MOCK=true --service backend-production
+          railway variables set USE_MOCK=true
         env:
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
 
       - name: Restart service with mock data
         run: |
-          railway redeploy --service backend-production
+          railway redeploy
         env:
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
 
