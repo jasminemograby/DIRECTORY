@@ -6,8 +6,7 @@ import {
   FileText, 
   TrendingUp,
   Clock,
-  CheckCircle,
-  AlertCircle
+  CheckCircle
 } from 'lucide-react';
 
 const stats = [

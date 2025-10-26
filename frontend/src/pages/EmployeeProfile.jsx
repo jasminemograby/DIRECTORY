@@ -7,9 +7,6 @@ import {
   Phone, 
   MapPin, 
   Calendar,
-  Award,
-  BookOpen,
-  TrendingUp,
   Edit,
   Star,
   Clock
@@ -24,7 +21,7 @@ export function EmployeeProfile() {
     // Simulate API call
     setTimeout(() => {
       setEmployee({
-        id: id,
+        id,
         name: 'Sarah Johnson',
         email: 'sarah.johnson@company.com',
         phone: '+1 (555) 123-4567',

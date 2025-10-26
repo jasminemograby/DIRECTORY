@@ -4,15 +4,10 @@ import { motion } from 'framer-motion';
 import { 
   GraduationCap, 
   Star, 
-  Users, 
-  Award,
   BookOpen,
-  Calendar,
   DollarSign,
   Globe,
-  MessageCircle,
-  Edit,
-  CheckCircle
+  Edit
 } from 'lucide-react';
 
 export function TrainerProfile() {
@@ -24,7 +19,7 @@ export function TrainerProfile() {
     // Simulate API call
     setTimeout(() => {
       setTrainer({
-        id: id,
+        id,
         name: 'Dr. Sarah Wilson',
         title: 'Senior Data Science Instructor',
         email: 'sarah.wilson@company.com',

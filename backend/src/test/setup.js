@@ -9,52 +9,55 @@ process.env.USE_MOCK = 'false';
 process.env.LOG_LEVEL = 'error';
 
 // Mock external dependencies
+const mockLogger = {
+  info: () => {},
+  error: () => {},
+  warn: () => {},
+  debug: () => {},
+};
+
+// Mock Winston
 jest.mock('winston', () => ({
-  createLogger: jest.fn(() => ({
-    info: jest.fn(),
-    error: jest.fn(),
-    warn: jest.fn(),
-    debug: jest.fn(),
-  })),
+  createLogger: () => mockLogger,
   format: {
-    combine: jest.fn(),
-    timestamp: jest.fn(),
-    json: jest.fn(),
-    colorize: jest.fn(),
-    simple: jest.fn(),
+    combine: () => {},
+    timestamp: () => {},
+    json: () => {},
+    colorize: () => {},
+    simple: () => {},
   },
   transports: {
-    Console: jest.fn(),
-    File: jest.fn(),
+    Console: () => {},
+    File: () => {},
   },
 }));
 
 // Mock Redis
 jest.mock('redis', () => ({
-  createClient: jest.fn(() => ({
-    connect: jest.fn(),
-    disconnect: jest.fn(),
-    get: jest.fn(),
-    set: jest.fn(),
-    del: jest.fn(),
-    exists: jest.fn(),
-    expire: jest.fn(),
-    on: jest.fn(),
-  })),
+  createClient: () => ({
+    connect: () => {},
+    disconnect: () => {},
+    get: () => {},
+    set: () => {},
+    del: () => {},
+    exists: () => {},
+    expire: () => {},
+    on: () => {},
+  }),
 }));
 
 // Mock external APIs
 jest.mock('axios', () => ({
-  get: jest.fn(),
-  post: jest.fn(),
-  put: jest.fn(),
-  delete: jest.fn(),
-  create: jest.fn(() => ({
-    get: jest.fn(),
-    post: jest.fn(),
-    put: jest.fn(),
-    delete: jest.fn(),
-  })),
+  get: () => {},
+  post: () => {},
+  put: () => {},
+  delete: () => {},
+  create: () => ({
+    get: () => {},
+    post: () => {},
+    put: () => {},
+    delete: () => {},
+  }),
 }));
 
 // Global test timeout
