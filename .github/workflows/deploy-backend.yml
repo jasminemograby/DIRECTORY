@@ -249,7 +249,7 @@ jobs:
     
     steps:
       - name: Notify Slack on Success
-        if: needs.deploy-production.result == 'success' && secrets.SLACK_WEBHOOK_URL != ''
+        if: needs.deploy-production.result == 'success'
         uses: 8398a7/action-slack@v3
         with:
           status: success
@@ -259,7 +259,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Notify Slack on Rollback
-        if: needs.rollback-check.result == 'success' && secrets.SLACK_WEBHOOK_URL != ''
+        if: needs.rollback-check.result == 'success'
         uses: 8398a7/action-slack@v3
         with:
           status: warning
@@ -269,7 +269,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Notify Slack on Failure
-        if: needs.deploy-production.result == 'failure' && needs.rollback-check.result == 'failure' && secrets.SLACK_WEBHOOK_URL != ''
+        if: needs.deploy-production.result == 'failure' && needs.rollback-check.result == 'failure'
         uses: 8398a7/action-slack@v3
         with:
           status: failure

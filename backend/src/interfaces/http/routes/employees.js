@@ -2,18 +2,16 @@ import express from 'express';
 import { EmployeeController } from '../controllers/EmployeeController.js';
 import { EmployeeService } from '../../../application/services/EmployeeService.js';
 import { EmployeeRepository } from '../../../infrastructure/database/repositories/EmployeeRepository.js';
-import { MockDataService } from '../../../infrastructure/mock/MockDataService.js';
 import { validateRequest } from '../middleware/validation.js';
-import { authenticateToken } from '../middleware/auth.js';
-import { authorize } from '../middleware/auth.js';
-import { employeeSchema, skillsSchema } from '../schemas/employeeSchema.js';
+import { authenticateToken, authorize } from '../middleware/auth.js';
+import { skillsSchema } from '../schemas/employeeSchema.js';
 
 const router = express.Router();
 
 // Initialize services with rollback-to-mock capability
 const employeeRepository = new EmployeeRepository();
-const mockEnrichmentAPI = new MockEnrichmentAPI();
-const mockSkillsAPI = new MockSkillsAPI();
+const mockEnrichmentAPI = { enrich: () => ({}) };
+const mockSkillsAPI = { getSkills: () => ({}) };
 const employeeService = new EmployeeService(employeeRepository, mockEnrichmentAPI, mockSkillsAPI);
 const employeeController = new EmployeeController(employeeService);
 

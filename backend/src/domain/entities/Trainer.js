@@ -51,7 +51,7 @@ export class Trainer {
 
   update(data) {
     Object.keys(data).forEach(key => {
-      if (key !== 'id' && key !== 'createdAt' && this.hasOwnProperty(key)) {
+      if (key !== 'id' && key !== 'createdAt' && Object.prototype.hasOwnProperty.call(this, key)) {
         this[key] = data[key];
       }
     });

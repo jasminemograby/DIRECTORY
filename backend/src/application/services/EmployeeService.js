@@ -249,7 +249,7 @@ export class EmployeeService {
         enrichmentData.sources.push(source);
         
         if (sourceData.valueProposition) {
-          enrichmentData.valueProposition += sourceData.valueProposition + ' ';
+          enrichmentData.valueProposition += `${sourceData.valueProposition} `;
         }
       } catch (error) {
         logger.warn(`Failed to enrich from ${source}`, { error: error.message });
@@ -259,7 +259,7 @@ export class EmployeeService {
     return enrichmentData;
   }
 
-  async callLinkedInAPI(employee) {
+  async callLinkedInAPI(_employee) {
     // Mock implementation - replace with real LinkedIn API call
     return {
       skills: [
@@ -270,7 +270,7 @@ export class EmployeeService {
     };
   }
 
-  async callGitHubAPI(employee) {
+  async callGitHubAPI(_employee) {
     // Mock implementation - replace with real GitHub API call
     return {
       skills: [
@@ -281,7 +281,7 @@ export class EmployeeService {
     };
   }
 
-  async callCredlyAPI(employee) {
+  async callCredlyAPI(_employee) {
     // Mock implementation - replace with real Credly API call
     return {
       skills: [
@@ -292,7 +292,7 @@ export class EmployeeService {
     };
   }
 
-  async callGeminiAPI(employee) {
+  async callGeminiAPI(_employee) {
     // Mock implementation - replace with real Gemini API call
     return {
       skills: [
@@ -303,7 +303,7 @@ export class EmployeeService {
     };
   }
 
-  async callORCIDAPI(employee) {
+  async callORCIDAPI(_employee) {
     // Mock implementation - replace with real ORCID API call
     return {
       skills: [

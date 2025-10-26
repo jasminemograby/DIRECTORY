@@ -17,7 +17,7 @@ export class BaseController {
   }
 
   // Standardized error response
-  errorResponse(error, source = 'live', statusCode = 500) {
+  errorResponse(error, source = 'live', _statusCode = 500) {
     const errorMessage = error.message || 'Internal server error';
     const errorCode = error.code || 'INTERNAL_ERROR';
     
@@ -35,7 +35,7 @@ export class BaseController {
   }
 
   // Async error handler wrapper
-  handleAsync(asyncFn, req, res) {
+  handleAsync(asyncFn, _req, _res) {
     return async (req, res, next) => {
       try {
         await asyncFn(req, res);

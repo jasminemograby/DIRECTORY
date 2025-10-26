@@ -65,7 +65,7 @@ export class TrainerService {
 
   async searchTrainers(searchParams) {
     try {
-      const { skills, teachingMode, trainerType, companyId } = searchParams;
+      const { skills, companyId } = searchParams;
       
       // Try database first
       if (!this.mockMode) {

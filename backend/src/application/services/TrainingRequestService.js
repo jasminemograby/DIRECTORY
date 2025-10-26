@@ -97,7 +97,7 @@ export class TrainingRequestService {
 
   async approveTrainingRequest(requestId, approverData) {
     try {
-      const { approverId, comments } = approverData;
+      const { approverId } = approverData;
       
       // Try database first
       if (!this.mockMode) {
@@ -271,8 +271,6 @@ export class TrainingRequestService {
 
   async searchTrainingRequests(searchParams) {
     try {
-      const { status, type, skillCategories, requesterId, companyId } = searchParams;
-      
       // Try database first
       if (!this.mockMode) {
         try {

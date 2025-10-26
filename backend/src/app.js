@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import { config } from './config/environment.js';
-import { logger, logRequest, logError } from './config/logging.js';
+import { logger, logRequest } from './config/logging.js';
 import { 
   globalErrorHandler, 
   notFoundHandler, 
@@ -25,8 +25,7 @@ import trainingRequestRoutes from './interfaces/http/routes/training-requests.js
 import mockRoutes from './interfaces/http/routes/mock.js';
 
 // Import middleware
-import { authenticateToken } from './interfaces/http/middleware/auth.js';
-import { validateCompanyAccess } from './interfaces/http/middleware/auth.js';
+import { authenticateToken, validateCompanyAccess } from './interfaces/http/middleware/auth.js';
 
 const app = express();
 
@@ -307,7 +306,10 @@ async function checkDatabaseHealth() {
 async function checkRedisHealth() {
   try {
     // Mock Redis health check - replace with actual Redis check
-    return { status: 'healthy', responseTime: '12ms' };
+    if (config.REDIS_URL) {
+      return { status: 'healthy', responseTime: '12ms' };
+    }
+    throw new Error('Redis not configured');
   } catch (error) {
     logger.error('Redis health check failed', { error: error.message });
     return { status: 'unhealthy', error: error.message };
@@ -317,13 +319,16 @@ async function checkRedisHealth() {
 async function checkExternalAPIsHealth() {
   try {
     // Mock external API health checks
-    return {
-      linkedin: 'healthy',
-      github: 'healthy',
-      credly: 'healthy',
-      gemini: 'healthy',
-      orcid: 'healthy'
-    };
+    if (config.USE_MOCK) {
+      return {
+        linkedin: 'healthy',
+        github: 'healthy',
+        credly: 'healthy',
+        gemini: 'healthy',
+        orcid: 'healthy'
+      };
+    }
+    throw new Error('External APIs not configured');
   } catch (error) {
     logger.error('External APIs health check failed', { error: error.message });
     return { status: 'unhealthy', error: error.message };

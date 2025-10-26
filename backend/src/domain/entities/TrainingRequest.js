@@ -63,7 +63,7 @@ export class TrainingRequest {
 
   update(data) {
     Object.keys(data).forEach(key => {
-      if (key !== 'id' && key !== 'createdAt' && this.hasOwnProperty(key)) {
+      if (key !== 'id' && key !== 'createdAt' && Object.prototype.hasOwnProperty.call(this, key)) {
         this[key] = data[key];
       }
     });
@@ -79,21 +79,21 @@ export class TrainingRequest {
     return !this.deletedAt && !['cancelled', 'completed'].includes(this.status);
   }
 
-  approve(approverId, comments = '') {
+  approve(approverId, _comments = '') {
     this.status = 'approved';
     this.approverId = approverId;
     this.approvedAt = new Date().toISOString();
     this.updatedAt = new Date().toISOString();
   }
 
-  reject(approverId, reason, comments = '') {
+  reject(approverId, reason, _comments = '') {
     this.status = 'rejected';
     this.approverId = approverId;
     this.rejectionReason = reason;
     this.updatedAt = new Date().toISOString();
   }
 
-  assignTrainer(trainerId, assignedBy) {
+  assignTrainer(trainerId, _assignedBy) {
     this.trainerId = trainerId;
     this.status = 'assigned';
     this.assignedAt = new Date().toISOString();

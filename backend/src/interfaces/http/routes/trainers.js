@@ -4,8 +4,7 @@ import { TrainerService } from '../../../application/services/TrainerService.js'
 import { TrainerRepository } from '../../../infrastructure/database/repositories/TrainerRepository.js';
 import { MockDataService } from '../../../infrastructure/mock/MockDataService.js';
 import { validateRequest } from '../middleware/validation.js';
-import { authenticateToken } from '../middleware/auth.js';
-import { authorize } from '../middleware/auth.js';
+import { authenticateToken, authorize } from '../middleware/auth.js';
 import { trainerSchema, certificationsSchema, availabilitySchema } from '../schemas/trainerSchema.js';
 
 const router = express.Router();

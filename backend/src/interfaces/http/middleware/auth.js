@@ -215,7 +215,7 @@ export const validateAPIKey = (req, res, next) => {
   
   if (!validAPIKeys.includes(apiKey)) {
     logSecurityEvent('INVALID_API_KEY', {
-      apiKey: apiKey.substring(0, 8) + '...',
+      apiKey: `${apiKey.substring(0, 8)}...`,
       ip: req.ip,
       method: req.method,
       url: req.url

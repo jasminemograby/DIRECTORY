@@ -23,7 +23,7 @@ export const employeeSchema = Joi.object({
   firstName: Joi.string().min(2).max(100).required(),
   lastName: Joi.string().min(2).max(100).required(),
   email: Joi.string().email().required(),
-  phone: Joi.string().pattern(/^\+?[\d\s\-\(\)]+$/).optional(),
+  phone: Joi.string().pattern(/^\+?[\d\s\-()]+$/).optional(),
   employeeId: Joi.string().min(2).max(50).required(),
   role: Joi.string().valid('hr_admin', 'manager', 'team_lead', 'employee', 'trainer').required(),
   jobTitle: Joi.string().min(2).max(255).required(),
@@ -388,7 +388,7 @@ export const validateEmail = (value) => {
 };
 
 export const validatePhone = (value) => {
-  const phoneRegex = /^\+?[\d\s\-\(\)]+$/;
+  const phoneRegex = /^\+?[\d\s\-()]+$/;
   return phoneRegex.test(value);
 };
 

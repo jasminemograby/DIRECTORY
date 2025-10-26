@@ -2,7 +2,7 @@ import { logger, createErrorResponse, classifyError } from '../../../config/logg
 import { config } from '../../../config/environment.js';
 
 // Global error handler middleware
-export const globalErrorHandler = (error, req, res, next) => {
+export const globalErrorHandler = (error, req, res, _next) => {
   // Log the error
   logger.error('Unhandled error', {
     error: error.message,

@@ -4,8 +4,7 @@ import { TrainingRequestService } from '../../../application/services/TrainingRe
 import { TrainingRequestRepository } from '../../../infrastructure/database/repositories/TrainingRequestRepository.js';
 import { MockDataService } from '../../../infrastructure/mock/MockDataService.js';
 import { validateRequest } from '../middleware/validation.js';
-import { authenticateToken } from '../middleware/auth.js';
-import { authorize } from '../middleware/auth.js';
+import { authenticateToken, authorize } from '../middleware/auth.js';
 import { trainingRequestSchema, approvalSchema, rejectionSchema, assignmentSchema } from '../schemas/trainingRequestSchema.js';
 
 const router = express.Router();

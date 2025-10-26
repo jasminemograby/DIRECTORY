@@ -4,8 +4,7 @@ import { CompanyService } from '../../../application/services/CompanyService.js'
 import { CompanyRepository } from '../../../infrastructure/database/repositories/CompanyRepository.js';
 import { MockDataService } from '../../../infrastructure/mock/MockDataService.js';
 import { validateRequest } from '../middleware/validation.js';
-import { authenticateToken } from '../middleware/auth.js';
-import { authorize } from '../middleware/auth.js';
+import { authenticateToken, authorize } from '../middleware/auth.js';
 import { companySchema } from '../schemas/companySchema.js';
 
 const router = express.Router();

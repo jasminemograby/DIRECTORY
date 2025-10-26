@@ -1,5 +1,6 @@
 import { BaseController } from './BaseController.js';
-import { logger } from '../../../config/logging.js';
+// eslint-disable-next-line no-unused-vars
+import { TrainerService } from '../../../application/services/TrainerService.js';
 
 export class TrainerController extends BaseController {
   constructor(trainerService) {
