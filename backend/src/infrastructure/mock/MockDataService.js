@@ -14,8 +14,8 @@ export class MockDataService {
   // Company methods
   async getCompany(companyId) {
     try {
-      const companies = await this.loadMockData('companies/mock-companies.json');
-      return companies.companies.find(c => c.id === companyId) || null;
+      const companies = await this.loadMockData('mock-companies.json');
+      return companies.find(c => c.id === companyId) || null;
     } catch (error) {
       logger.error('Failed to load mock company data', { error: error.message, companyId });
       return null;
@@ -24,8 +24,8 @@ export class MockDataService {
 
   async getCompanies(filters = {}) {
     try {
-      const companies = await this.loadMockData('companies/mock-companies.json');
-      let filteredCompanies = companies.companies;
+      const companies = await this.loadMockData('mock-companies.json');
+      let filteredCompanies = companies;
 
       // Apply filters
       if (filters.search) {
@@ -141,8 +141,8 @@ export class MockDataService {
   // Employee methods
   async getEmployee(employeeId) {
     try {
-      const employees = await this.loadMockData('employees/mock-employees.json');
-      return employees.employees.find(e => e.id === employeeId) || null;
+      const employees = await this.loadMockData('mock-employees.json');
+      return employees.find(e => e.id === employeeId) || null;
     } catch (error) {
       logger.error('Failed to load mock employee data', { error: error.message, employeeId });
       return null;
@@ -151,8 +151,8 @@ export class MockDataService {
 
   async getEmployees(filters = {}) {
     try {
-      const employees = await this.loadMockData('employees/mock-employees.json');
-      let filteredEmployees = employees.employees;
+      const employees = await this.loadMockData('mock-employees.json');
+      let filteredEmployees = employees;
 
       // Apply filters
       if (filters.search) {
@@ -243,8 +243,8 @@ export class MockDataService {
   // Trainer methods
   async getTrainer(trainerId) {
     try {
-      const trainers = await this.loadMockData('trainers/mock-trainers.json');
-      return trainers.trainers.find(t => t.id === trainerId) || null;
+      const trainers = await this.loadMockData('mock-trainers.json');
+      return trainers.find(t => t.id === trainerId) || null;
     } catch (error) {
       logger.error('Failed to load mock trainer data', { error: error.message, trainerId });
       return null;
@@ -253,8 +253,8 @@ export class MockDataService {
 
   async getTrainers(filters = {}) {
     try {
-      const trainers = await this.loadMockData('trainers/mock-trainers.json');
-      let filteredTrainers = trainers.trainers;
+      const trainers = await this.loadMockData('mock-trainers.json');
+      let filteredTrainers = trainers;
 
       // Apply filters
       if (filters.companyId) {
@@ -397,8 +397,8 @@ export class MockDataService {
   // Training Request methods
   async getTrainingRequest(requestId) {
     try {
-      const requests = await this.loadMockData('training-requests/mock-training-requests.json');
-      return requests.requests.find(r => r.id === requestId) || null;
+      const requests = await this.loadMockData('mock-training-requests.json');
+      return requests.find(r => r.id === requestId) || null;
     } catch (error) {
       logger.error('Failed to load mock training request data', { error: error.message, requestId });
       return null;
@@ -407,8 +407,8 @@ export class MockDataService {
 
   async getTrainingRequests(filters = {}) {
     try {
-      const requests = await this.loadMockData('training-requests/mock-training-requests.json');
-      let filteredRequests = requests.requests;
+      const requests = await this.loadMockData('mock-training-requests.json');
+      let filteredRequests = requests;
 
       // Apply filters
       if (filters.companyId) {
